@@ -1,28 +1,28 @@
-﻿global using System;
-global using System.Linq;
-global using System.Collections.Generic;
-global using UnityEngine;
-
-using BepInEx;
+﻿using BepInEx;
 using System.Security.Permissions;
 
 #pragma warning disable CS0618 // Do not remove the following line.
 [assembly: SecurityPermission(SecurityAction.RequestMinimum, SkipVerification = true)]
 
-namespace TestMod;
+namespace ChieftainEternal;
 
-[BepInPlugin("com.author.testmod", "Test Mod", "0.1.0")]
+[BepInPlugin("com.dual.chieftain-eternal", "Chieftain Eternal", "1.0.0")]
 sealed class Plugin : BaseUnityPlugin
 {
     public void OnEnable()
     {
-        On.RainWorld.OnModsInit += Init;
+        On.WinState.CycleCompleted += WinState_CycleCompleted;
     }
 
-    private void Init(On.RainWorld.orig_OnModsInit orig, RainWorld self)
+    private void WinState_CycleCompleted(On.WinState.orig_CycleCompleted orig, WinState self, RainWorldGame game)
     {
-        orig(self);
+        if (self.GetTracker(WinState.EndgameID.Chieftain, addIfMissing: false) is WinState.FloatTracker chieftain && chieftain.progress >= chieftain.max) {
+            orig(self, game);
 
-        Logger.LogDebug("Hello world!");
+            chieftain.progress = chieftain.max;
+        }
+        else {
+            orig(self, game);
+        }
     }
 }

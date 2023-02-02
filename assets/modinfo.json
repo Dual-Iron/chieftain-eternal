@@ -1,9 +1,9 @@
 ﻿{
-  "id": "testmod",
-  "name": "Test Mod",
-  "version": "0.1.0",
-  "authors": "Author",
-  "description": "Put a neat description here",
+  "id": "chieftain-eternal",
+  "name": "Once Chieftain, Always Chieftain",
+  "version": "1.0.0",
+  "authors": "Dual",
+  "description": "Prevents losing the Chieftain passage after angering scavengers.<LINE><LINE>Just in case your opinion of them changes midway through your playthrough.",
   "requirements": [],
   "requirements_names": [],
   "checksum_override_version": false
